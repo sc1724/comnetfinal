@@ -8,10 +8,10 @@ To test multicast program run in the order below and on the corresponding nodes.
 6. In r1 terminal --> python3.5 router1.py
 7. In r2 terminal --> python3.5 router2.py
 8. In r3 terminal --> python3.5 router3.py
-6. In r4 terminal --> python3.5 router4.py
-7. In r5 terminal --> python3.5 router5.py
-8. In r6 terminal --> python3.5 router6.py
-9. In r6 terminal --> python3.5 router7.py
-10. In s terminal --> python3.5 udpclient.py
+9. In r4 terminal --> python3.5 router4.py
+10. In r5 terminal --> python3.5 router5.py
+11. In r6 terminal --> python3.5 router6.py
+12. In r6 terminal --> python3.5 router7.py
+13. In s terminal --> python3.5 udpclient.py
 
 To change the k value and data value go to line 16 and 17 respectively in the udpclient.py file.

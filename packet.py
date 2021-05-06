@@ -83,6 +83,14 @@ def senddata(h, dst1, dst2, dst3, data, k):
     	send_packet(h, packetdata)
     return 0
 
+def multicast(h, k):
+    seq_num = 0
+    dataseq = seq_num
+    data = 'multicast'
+    packet = create_data(2, dataseq, len(data), h.id, k, dst, None, None, 3, k, data)
+    send_packet(h, packet)
+    send_time = time.time()
+
 def send_packet(h, packet):
     s = socket(AF_INET, SOCK_DGRAM)
     s.sendto(packet, h.default_gateway)

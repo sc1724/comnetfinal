@@ -10,6 +10,8 @@ import numpy as np
 
 dataseq = 0
 helloseq = 0
+updateseq= 0
+ls = []
 ttl = .05
 
 
@@ -45,7 +47,7 @@ def read_update(pkt):
 def read_datapacket(pkt):
     header = pkt[0:80]
     pkttype, seq, pktlen, src, kval, dst1, dst2, dst3, nval, kremain = struct.unpack('BBBBBBBBBB', header)
-    return pkttype, seq, pktlen, src, kval, dst, nval, kremain
+    return pkttype, seq, pktlen, src, kval, dst1, dst2, dst3, nval, kremain
 
 def read_dataack(pkt):
     header = pkt[0:28]
@@ -66,7 +68,7 @@ def sendhello(h):
     return 0
 
 def sendupdate(h):
-    packet = create_packet(1,updateseq, ttl, h.id, ls)
+    packet = create_update(1,updateseq, ttl, h.id, ls)
     send_packet(h, packet)
     return 0
 
@@ -103,13 +105,12 @@ def receive_packet(h, sent_packet):
             pkttype, seq, pktlen, src, kval, dst1, dst2, dst3, nval, kremain = read_datapacket(sent_packet)
             seq_failed = seq
             break
-
-        if(pkttype == 2 and dst == h.id):
+        if(pkttype == 2 and dest == h.id):
             print("Received: ", packet, " From: ", src)
             packet = create_dataack(3, seq, h.id, src)
             send_packet(h, packet)
 
-        elif(pkttype == 3 and dst == h.id):
+        elif(pkttype == 3 and dest == h.id):
             break
 
     s.close()
